@@ -48,12 +48,18 @@ Dictionary.prototype.setWordlist = function(wordlist) {
 Dictionary.prototype.spellCheck = function(word) {
     // Since the list is sorted, is more fast to do a binary search than 'this.wordlist.indexOf(word)'.
     var res = BinarySearch(
-        this.wordlist, // Haystack
-        //Old version make bugs that uppercase word is not spell correct -> //word.toLowerCase(), // Needle
-        word, // Needle
-        Collator.compare // Comparison method
+      this.wordlist, // Haystack
+      word, // Needle
+      Collator.compare // Comparison method
     );
-    return res >= 0;
+
+    var res2 = BinarySearch(
+      this.wordlist, // Haystack
+      word.toLowerCase(), // Needle
+      Collator.compare // Comparison method
+    );
+
+    return res >= 0 || res2 >= 0;
 };
 
 /**
