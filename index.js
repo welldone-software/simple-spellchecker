@@ -32,7 +32,8 @@ var readFile = function (path) {
 var SpellChecker = {
     getDictionary: function(path) {
         return readFile(path).then(function (text) {
-            const dictionary = new Dictionary(text.split('\n'))
+            const list = text.split('\n').map(l => l.trim())
+            const dictionary = new Dictionary(list)
             return dictionary
         })
     }
